@@ -50,15 +50,15 @@ export default function TicketsPage() {
         getApiTicketCategories({ throwOnError: false }),
       ]);
 
-      if (ticketsRes.data?.isSuccess) {
-        setTickets(Array.isArray(ticketsRes.data.value) ? ticketsRes.data.value : []);
+      if ((ticketsRes.data as any)?.isSuccess) {
+        setTickets(Array.isArray((ticketsRes.data as any)?.value) ? (ticketsRes.data as any)?.value : []);
       } else {
         // @ts-ignore
-        setError(ticketsRes.error?.title || ticketsRes.data?.errors?.[0]?.description || "Failed to load tickets");
+        setError(ticketsRes.error?.title || (ticketsRes.data as any)?.errors?.[0]?.description || "Failed to load tickets");
       }
 
-      if (categoriesRes.data?.isSuccess) {
-        setCategories(Array.isArray(categoriesRes.data.value) ? categoriesRes.data.value : []);
+      if ((categoriesRes.data as any)?.isSuccess) {
+        setCategories(Array.isArray((categoriesRes.data as any)?.value) ? (categoriesRes.data as any)?.value : []);
       }
     } catch (err: any) {
       setError(err.message || "An error occurred.");

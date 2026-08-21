@@ -41,13 +41,13 @@ export default function ProductFeaturesModal({ product, onClose, onSuccess }: Pr
         throwOnError: false
       });
 
-      if (response.data?.isSuccess && response.data.value) {
-        setFeaturesList([...featuresList, response.data.value]);
+      if ((response.data as any)?.isSuccess && (response.data as any).value) {
+        setFeaturesList([...featuresList, (response.data as any).value]);
         setIsAddingFeature(false);
         setNewFeature({ featureName: "", featureType: "Allowed", janDrozdFeatureId: "" });
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to add feature.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to add feature.";
         setError(errorMsg);
       }
     } catch (err: any) {
@@ -68,11 +68,11 @@ export default function ProductFeaturesModal({ product, onClose, onSuccess }: Pr
         throwOnError: false
       });
 
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setFeaturesList(featuresList.filter(f => f.id !== featureId));
         onSuccess();
       } else {
-        setError(response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete feature.");
+        setError((response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete feature.");
       }
     } catch (err: any) {
       setError(err.message || "Error deleting feature.");

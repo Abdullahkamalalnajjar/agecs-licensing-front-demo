@@ -31,8 +31,8 @@ export default function LoginPage() {
         body: { email, password }
       });
 
-      if (response.data?.isSuccess && response.data?.value?.accessToken) {
-        const token = response.data.value.accessToken;
+      if ((response.data as any)?.isSuccess && (response.data as any)?.value?.accessToken) {
+        const token = (response.data as any).value.accessToken;
         
         // Use the auth context login method to update global state immediately
         login(token);
@@ -52,7 +52,7 @@ export default function LoginPage() {
         }
       } else {
         const errorMsg =
-          response.data?.errors?.map((e) => e.description).filter(Boolean).join(", ") ||
+          (response.data as any)?.errors?.map((e: any) => e.description).filter(Boolean).join(", ") ||
           "Invalid credentials or response format.";
         setError(errorMsg);
       }
@@ -77,8 +77,8 @@ export default function LoginPage() {
         body: { idToken: credentialResponse.credential }
       });
 
-      if (response.data?.isSuccess && response.data?.value?.accessToken) {
-        const token = response.data.value.accessToken;
+      if ((response.data as any)?.isSuccess && (response.data as any)?.value?.accessToken) {
+        const token = (response.data as any).value.accessToken;
         
         // Use the auth context login method to update global state immediately
         login(token);
@@ -98,7 +98,7 @@ export default function LoginPage() {
         }
       } else {
         const errorMsg =
-          response.data?.errors?.map((e: any) => e.description).filter(Boolean).join(", ") ||
+          (response.data as any)?.errors?.map((e: any) => e.description).filter(Boolean).join(", ") ||
           "Invalid credentials or response format.";
         setError(errorMsg);
       }

@@ -38,11 +38,11 @@ export default function TicketDetailsPage() {
 
       const response = await getApiTicketsById({ path: { id: ticketId }, throwOnError: false });
 
-      if (response.data?.isSuccess) {
-        setTicket(response.data.value);
+      if ((response.data as any)?.isSuccess) {
+        setTicket((response.data as any).value);
       } else {
         // @ts-ignore
-        setError(response.error?.title || response.data?.errors?.[0]?.description || "Failed to load ticket details");
+        setError(response.error?.title || (response.data as any)?.errors?.[0]?.description || "Failed to load ticket details");
       }
     } catch (err: any) {
       setError(err.message || "An error occurred while fetching ticket.");
@@ -67,7 +67,7 @@ export default function TicketDetailsPage() {
         throwOnError: false
       });
       
-      if (response.data !== undefined && response.error === undefined) {
+      if ((response.data as any) !== undefined && response.error === undefined) {
         setCommentText("");
         fetchTicket(); // Reload ticket to get new comment
       } else {
@@ -90,7 +90,7 @@ export default function TicketDetailsPage() {
         throwOnError: false
       });
       
-      if (response.data !== undefined && response.error === undefined) {
+      if ((response.data as any) !== undefined && response.error === undefined) {
         fetchTicket(); // Reload to get new status
       } else {
         // @ts-ignore

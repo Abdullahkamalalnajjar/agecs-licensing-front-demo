@@ -35,10 +35,10 @@ export default function ProductVersionsModal({ product, onClose, onSuccess }: Pr
         path: { id: product.id! },
         throwOnError: false
       });
-      if (response.data?.isSuccess) {
-        setVersions(Array.isArray(response.data.value) ? response.data.value : []);
+      if ((response.data as any)?.isSuccess) {
+        setVersions(Array.isArray((response.data as any).value) ? (response.data as any).value : []);
       } else {
-        setError(response.data?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).join(", ") || "Failed to load versions.");
+        setError((response.data as any)?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).join(", ") || "Failed to load versions.");
       }
     } catch (err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       setError(err.message || "An error occurred fetching versions.");
@@ -69,16 +69,16 @@ export default function ProductVersionsModal({ product, onClose, onSuccess }: Pr
         throwOnError: false
       });
 
-      if (response.data?.isSuccess && response.data.value) {
-        setVersions([...versions, response.data.value]);
+      if ((response.data as any)?.isSuccess && (response.data as any).value) {
+        setVersions([...versions, (response.data as any).value]);
         setSelectedFile(null);
         setVersionNumber("");
         setReleaseNotes("");
         const fileInput = document.getElementById("versionFile") as HTMLInputElement;
         if (fileInput) fileInput.value = "";
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).filter(Boolean).join(", ") || "Failed to add version.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).filter(Boolean).join(", ") || "Failed to add version.";
         setError(errorMsg);
       }
     } catch (err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
@@ -100,11 +100,11 @@ export default function ProductVersionsModal({ product, onClose, onSuccess }: Pr
         body: !targetVersion.isActive,
         throwOnError: false
       });
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setVersions(versions.map(v => v.id === versionId ? { ...v, isActive: !v.isActive } : v));
         onSuccess();
       } else {
-        setError(response.data?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).join(", ") || "Failed to toggle status.");
+        setError((response.data as any)?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).join(", ") || "Failed to toggle status.");
       }
     } catch (err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       setError(err.message || "An error occurred while toggling status.");
@@ -124,11 +124,11 @@ export default function ProductVersionsModal({ product, onClose, onSuccess }: Pr
         throwOnError: false
       });
 
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setVersions(versions.filter(v => v.id !== versionId));
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).filter(Boolean).join(", ") || "Failed to delete version.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) => err.description).filter(Boolean).join(", ") || "Failed to delete version.";
         setError(errorMsg);
       }
     } catch (err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {

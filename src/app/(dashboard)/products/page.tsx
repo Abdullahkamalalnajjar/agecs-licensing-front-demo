@@ -33,10 +33,10 @@ export default function ProductsPage() {
       });
 
       const response = await getApiProducts({ throwOnError: false });
-      if (response.data?.isSuccess) {
-        setProducts(response.data.value || []);
-      } else if (response.error || response.data?.isError) {
-        setError(response.data?.errors?.map((e) => e.description).join(", ") || "Failed to load products.");
+      if ((response.data as any)?.isSuccess) {
+        setProducts((response.data as any).value || []);
+      } else if (response.error || (response.data as any)?.isError) {
+        setError((response.data as any)?.errors?.map((e: any) => e.description).join(", ") || "Failed to load products.");
       }
     } catch (err: any) {
       setError(err.message || "An error occurred.");

@@ -26,11 +26,11 @@ export default function TicketCategoriesPage() {
       });
 
       const response = await getApiTicketCategories({ throwOnError: false });
-      if (response.data?.isSuccess) {
-        setCategories(Array.isArray(response.data.value) ? response.data.value : []);
-      } else if (response.error || response.data?.isError) {
+      if ((response.data as any)?.isSuccess) {
+        setCategories(Array.isArray((response.data as any).value) ? (response.data as any).value : []);
+      } else if (response.error || (response.data as any)?.isError) {
         // @ts-ignore
-        setError(response.error?.title || response.data?.errors?.[0]?.description || "Failed to load categories.");
+        setError(response.error?.title || (response.data as any)?.errors?.[0]?.description || "Failed to load categories.");
       }
     } catch (err: any) {
       setError(err.message || "An error occurred.");
@@ -46,7 +46,7 @@ export default function TicketCategoriesPage() {
     setError("");
     try {
       const response = await deleteApiTicketCategoriesById({ path: { id }, throwOnError: false });
-      if (response.data !== undefined && response.error === undefined) {
+      if ((response.data as any) !== undefined && response.error === undefined) {
         fetchCategories();
       } else if (response.error) {
         // @ts-ignore

@@ -58,11 +58,11 @@ export default function LicensesPage() {
         getIdentityUsers({ throwOnError: false })
       ]);
 
-      if (usersRes.data?.isSuccess) {
-        setUsers(Array.isArray(usersRes.data.value) ? usersRes.data.value : []);
+      if ((usersRes.data as any)?.isSuccess) {
+        setUsers(Array.isArray((usersRes.data as any)?.value) ? (usersRes.data as any)?.value : []);
       }
-      if (productsRes.data?.isSuccess) {
-        setProducts(Array.isArray(productsRes.data.value) ? productsRes.data.value : []);
+      if ((productsRes.data as any)?.isSuccess) {
+        setProducts(Array.isArray((productsRes.data as any)?.value) ? (productsRes.data as any)?.value : []);
       }
       if (licensesRes.data) {
         const raw = licensesRes.data as any;

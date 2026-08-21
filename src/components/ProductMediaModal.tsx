@@ -31,14 +31,14 @@ export default function ProductMediaModal({ product, onClose, onSuccess }: Produ
         throwOnError: false
       });
 
-      if (response.data?.isSuccess && response.data.value) {
-        setMediaList([...mediaList, response.data.value]);
+      if ((response.data as any)?.isSuccess && (response.data as any).value) {
+        setMediaList([...mediaList, (response.data as any).value]);
         setSelectedFile(null);
         const fileInput = document.getElementById("mediaFile") as HTMLInputElement;
         if (fileInput) fileInput.value = "";
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to add media.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to add media.";
         setError(errorMsg);
       }
     } catch (err: any) {
@@ -58,11 +58,11 @@ export default function ProductMediaModal({ product, onClose, onSuccess }: Produ
         throwOnError: false
       });
 
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setMediaList(mediaList.filter(m => m.id !== mediaId));
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete media.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete media.";
         setError(errorMsg);
       }
     } catch (err: any) {

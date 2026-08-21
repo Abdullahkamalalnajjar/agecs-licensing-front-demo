@@ -44,19 +44,19 @@ export default function ProductDetailsPage() {
       });
 
       const response = await getApiProductsById({ path: { id: productId }, throwOnError: false });
-      if (response.data?.isSuccess) {
-        setProduct(response.data.value || null);
+      if ((response.data as any)?.isSuccess) {
+        setProduct((response.data as any).value || null);
         
         try {
           const versionsResp = await getApiProductsByIdVersions({ path: { id: productId }, query: { onlyActive: true }, throwOnError: false });
-          if (versionsResp.data?.isSuccess) {
-            setActiveVersions(versionsResp.data.value || []);
+          if ((versionsResp.data as any)?.isSuccess) {
+            setActiveVersions((versionsResp.data as any)?.value || []);
           }
         } catch (e) {
           console.error("Failed to fetch versions", e);
         }
-      } else if (response.error || response.data?.isError) {
-        setError(response.data?.errors?.map((e) => e.description).join(", ") || "Failed to load product.");
+      } else if (response.error || (response.data as any)?.isError) {
+        setError((response.data as any)?.errors?.map((e: any) => e.description).join(", ") || "Failed to load product.");
       }
     } catch (err: any) {
       setError(err.message || "An error occurred.");
@@ -71,10 +71,10 @@ export default function ProductDetailsPage() {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
       const response = await deleteApiProductsById({ path: { id: productId! }, throwOnError: false });
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         router.push("/products");
       } else {
-        alert(response.data?.errors?.map((e: any) => e.description).join(", ") || "Failed to delete.");
+        alert((response.data as any)?.errors?.map((e: any) => e.description).join(", ") || "Failed to delete.");
       }
     } catch (err: any) {
       alert(err.message || "Error deleting product.");

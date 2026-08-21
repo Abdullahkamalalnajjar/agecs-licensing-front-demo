@@ -35,7 +35,7 @@ export default function TicketFormModal({ categories, onClose, onSuccess }: Tick
 
       const response = await postApiTickets({ body: payload, throwOnError: false });
 
-      if (response.data) {
+      if ((response.data as any)) {
         onSuccess();
       } else if (response.error) {
         // @ts-ignore

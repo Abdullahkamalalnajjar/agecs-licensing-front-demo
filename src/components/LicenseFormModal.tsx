@@ -153,21 +153,21 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
           throwOnError: false 
         });
 
-        if (response.data !== undefined && response.error === undefined) {
+        if ((response.data as any) !== undefined && response.error === undefined) {
           onSuccess();
           onClose();
-        } else if (response.error || response.data?.isError) {
-          const errorMsg = response.error?.title || response.error?.detail || response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to update license.";
+        } else if (response.error || (response.data as any)?.isError) {
+          const errorMsg = response.error?.title || response.error?.detail || (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to update license.";
           setError(errorMsg);
         }
       } else {
         response = await postApiLicenses({ body: payload, throwOnError: false });
 
-        if (response.data !== undefined && response.error === undefined) {
-          const licenseObj = response.data?.value || response.data;
+        if ((response.data as any) !== undefined && response.error === undefined) {
+          const licenseObj = (response.data as any)?.value || (response.data as any);
           setGeneratedLicense(licenseObj);
-        } else if (response.error || response.data?.isError) {
-          const errorMsg = response.error?.title || response.error?.detail || response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to create license.";
+        } else if (response.error || (response.data as any)?.isError) {
+          const errorMsg = response.error?.title || response.error?.detail || (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to create license.";
           setError(errorMsg);
         }
       }

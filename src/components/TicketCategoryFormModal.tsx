@@ -45,7 +45,7 @@ export default function TicketCategoryFormModal({ initialData, onClose, onSucces
         response = await postApiTicketCategories({ body: payload, throwOnError: false });
       }
 
-      if (response.data !== undefined && response.error === undefined) {
+      if ((response.data as any) !== undefined && response.error === undefined) {
         onSuccess();
       } else if (response.error) {
         // @ts-ignore

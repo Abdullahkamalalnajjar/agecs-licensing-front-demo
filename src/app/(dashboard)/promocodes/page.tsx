@@ -25,10 +25,10 @@ export default function PromocodesPage() {
       });
 
       const response = await getApiPromocodes({ throwOnError: false });
-      if (response.data?.isSuccess) {
-        setPromocodes(Array.isArray(response.data.value) ? response.data.value : []);
-      } else if (response.error || response.data?.isError) {
-        setError(response.data?.errors?.map((e) => e.description).join(", ") || "Failed to load promocodes.");
+      if ((response.data as any)?.isSuccess) {
+        setPromocodes(Array.isArray((response.data as any).value) ? (response.data as any).value : []);
+      } else if (response.error || (response.data as any)?.isError) {
+        setError((response.data as any)?.errors?.map((e: any) => e.description).join(", ") || "Failed to load promocodes.");
       }
     } catch (err: any) {
       setError(err.message || "An error occurred.");
@@ -43,10 +43,10 @@ export default function PromocodesPage() {
     if (!confirm("Delete this promocode?")) return;
     try {
       const response = await deleteApiPromocodesById({ path: { id }, throwOnError: false });
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setPromocodes(promocodes.filter((p) => p.id !== id));
       } else {
-        alert(response.data?.errors?.map((e) => e.description).join(", ") || "Failed to delete.");
+        alert((response.data as any)?.errors?.map((e: any) => e.description).join(", ") || "Failed to delete.");
       }
     } catch (err: any) {
       alert(err.message || "Error deleting promocode.");

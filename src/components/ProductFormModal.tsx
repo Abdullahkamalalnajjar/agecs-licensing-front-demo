@@ -64,10 +64,10 @@ export default function ProductFormModal({ initialData, onClose, onSuccess }: Pr
         response = await postApiProducts({ body: payload, throwOnError: false });
       }
 
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         onSuccess();
-      } else if (response.error || response.data?.isError) {
-        const errorMsg = response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to save product.";
+      } else if (response.error || (response.data as any)?.isError) {
+        const errorMsg = (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to save product.";
         setError(errorMsg);
       }
     } catch (err: any) {

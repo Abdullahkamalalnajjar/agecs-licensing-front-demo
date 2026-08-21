@@ -63,10 +63,10 @@ export default function PromocodeFormModal({ isOpen, onClose, onSuccess, promoco
           throwOnError: false
         });
 
-        if (createRes.data?.isSuccess && createRes.data.value) {
-          currentId = createRes.data.value.id;
+        if ((createRes.data as any)?.isSuccess && (createRes.data as any)?.value) {
+          currentId = (createRes.data as any)?.value.id;
         } else {
-          throw new Error(createRes.data?.errors?.map((err: any) => err.description).join(", ") || "Failed to create promocode.");
+          throw new Error((createRes.data as any)?.errors?.map((err: any) => err.description).join(", ") || "Failed to create promocode.");
         }
       }
 
@@ -83,8 +83,8 @@ export default function PromocodeFormModal({ isOpen, onClose, onSuccess, promoco
         throwOnError: false
       });
 
-      if (discountsRes.error || discountsRes.data?.isError) {
-        throw new Error(discountsRes.data?.errors?.map((err: any) => err.description).join(", ") || "Failed to update discounts.");
+      if (discountsRes.error || (discountsRes.data as any)?.isError) {
+        throw new Error((discountsRes.data as any)?.errors?.map((err: any) => err.description).join(", ") || "Failed to update discounts.");
       }
 
       const audienceRes = await putApiPromocodesByIdAudience({
@@ -97,8 +97,8 @@ export default function PromocodeFormModal({ isOpen, onClose, onSuccess, promoco
         throwOnError: false
       });
 
-      if (audienceRes.error || audienceRes.data?.isError) {
-        throw new Error(audienceRes.data?.errors?.map((err: any) => err.description).join(", ") || "Failed to update audience.");
+      if (audienceRes.error || (audienceRes.data as any)?.isError) {
+        throw new Error((audienceRes.data as any)?.errors?.map((err: any) => err.description).join(", ") || "Failed to update audience.");
       }
 
       onSuccess();

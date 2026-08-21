@@ -41,11 +41,11 @@ export default function ChildProductsModal({ product, onClose, onSuccess, onOpen
     setError("");
     try {
       const response = await deleteApiProductsById({ path: { id: childId }, throwOnError: false });
-      if (response.data?.isSuccess) {
+      if ((response.data as any)?.isSuccess) {
         setChildrenList(childrenList.filter(c => c.id !== childId));
         onSuccess();
       } else {
-        const errorMsg = response.data?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete variant.";
+        const errorMsg = (response.data as any)?.errors?.map((err: any) => err.description).filter(Boolean).join(", ") || "Failed to delete variant.";
         setError(errorMsg);
       }
     } catch (err: any) {
@@ -91,11 +91,11 @@ export default function ChildProductsModal({ product, onClose, onSuccess, onOpen
         });
       }
 
-      if (response?.data?.isSuccess && response.data.value) {
+      if (response?.data?.isSuccess && (response.data as any).value) {
         if (newChild.id) {
-          setChildrenList(childrenList.map(c => c.id === newChild.id ? response.data!.value! : c));
+          setChildrenList(childrenList.map(c => c.id === newChild.id ? (response.data as any)!.value! : c));
         } else {
-          setChildrenList([...childrenList, response.data!.value!]);
+          setChildrenList([...childrenList, (response.data as any)!.value!]);
         }
         setIsAddingChild(false);
         setNewChild({ id: "", name: "", fullName: "", janDrozdId: "" });
