@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import { GoogleAuthProviderWrapper } from "@/components/GoogleAuthProviderWrapper";
+import { AuthProvider } from "@/components/AuthProvider";
+
+import { MSWProvider } from "@/mocks/MSWProvider";
+
+export const metadata: Metadata = {
+  title: "Agecs Licensing | Admin Dashboard",
+  description: "Next generation software licensing platform — manage products, promocodes, and support tickets.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+        {/* Prevent flash of wrong theme (FOUC) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body>
+        <MSWProvider>
+          <AuthProvider>
+            <GoogleAuthProviderWrapper>
+              {children}
+            </GoogleAuthProviderWrapper>
+          </AuthProvider>
+        </MSWProvider>
+      </body>
+    </html>
+  );
+}
