@@ -18,9 +18,9 @@ export default function LoginPage() {
       const decoded: any = jwtDecode(token);
       const role = [decoded.role, decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]]
         .flat().filter(Boolean)[0];
-      router.push(role === "Student" ? "/products" : "/products");
+      router.push("/home.html");
     } catch {
-      router.push("/products");
+      router.push("/home.html");
     }
   };
 
