@@ -1383,7 +1383,7 @@
           </svg>
           <span class="cart-count">3</span>
         </span>
-        <a href="/login" style="
+        <a href="/login" id="admin-login-btn" style="
           display:inline-flex;align-items:center;gap:6px;
           padding:8px 18px;border-radius:3px;
           background:#071f49;color:#fff;
@@ -1792,6 +1792,41 @@
     setInterval(() => {
       show((current + 1) % slides.length);
     }, 5200);
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const base64Url = token.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+          const payload = JSON.parse(jsonPayload);
+          
+          let email = payload.email || payload.unique_name || "";
+          if (Array.isArray(email)) email = email[0];
+          
+          let name = payload.name || email.split('@')[0] || "Dashboard";
+          
+          const btn = document.getElementById("admin-login-btn");
+          if (btn) {
+            btn.innerHTML = `
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              ${name}
+            `;
+            btn.href = "/products"; 
+          }
+        } catch (e) {
+          console.error("Failed to parse token", e);
+        }
+      }
+    });
   </script>
 </body>
 
