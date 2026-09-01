@@ -21,23 +21,7 @@ export const handlers = [
       errors: []
     });
   }),
-  http.post(`${BASE_URL}/identity/token/generate`, () => {
-    return HttpResponse.json({
-      value: { accessToken: "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJtb2NrLXVzZXItMTIzIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIn0.", refreshToken: "mock-refresh-token", expiresOnUtc: "2099-01-01T00:00:00Z" },
-      isSuccess: true,
-      isError: false,
-      errors: []
-    });
-  }),
-  http.post(`${BASE_URL}/identity/token/google`, () => {
-    return HttpResponse.json({
-      value: { accessToken: "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJtb2NrLXVzZXItMTIzIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIn0.", refreshToken: "mock-refresh-token", expiresOnUtc: "2099-01-01T00:00:00Z" },
-      isSuccess: true,
-      isError: false,
-      errors: []
-    });
-  }),
-  
+
   // Products
   http.get(`${BASE_URL}/api/products`, () => {
     return HttpResponse.json({
