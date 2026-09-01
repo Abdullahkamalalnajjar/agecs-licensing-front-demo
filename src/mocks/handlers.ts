@@ -106,13 +106,4 @@ export const handlers = [
     });
   }),
   
-  // Fallback for everything else
-  http.all(`${BASE_URL}/*`, () => {
-    return HttpResponse.json({
-      isSuccess: true,
-      value: {},
-      isError: false,
-      errors: []
-    });
-  })
 ];
