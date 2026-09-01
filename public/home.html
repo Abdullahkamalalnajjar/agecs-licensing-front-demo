@@ -1820,7 +1820,79 @@
               </svg>
               ${name}
             `;
-            btn.href = "/products"; 
+            btn.href = "javascript:void(0)"; 
+            
+            // Create a wrapper for relative positioning
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            btn.parentNode.insertBefore(wrapper, btn);
+            wrapper.appendChild(btn);
+
+            // Create dropdown menu
+            const dropdown = document.createElement('div');
+            dropdown.style.position = 'absolute';
+            dropdown.style.top = '100%';
+            dropdown.style.right = '0';
+            dropdown.style.marginTop = '8px';
+            dropdown.style.background = '#fff';
+            dropdown.style.border = '1px solid #e5e5e5';
+            dropdown.style.borderRadius = '6px';
+            dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            dropdown.style.padding = '4px 0';
+            dropdown.style.minWidth = '140px';
+            dropdown.style.display = 'none';
+            dropdown.style.zIndex = '100';
+            dropdown.style.fontFamily = 'var(--font-sans, system-ui)';
+
+            // Add Dashboard link
+            const dashboardLink = document.createElement('a');
+            dashboardLink.href = "/products";
+            dashboardLink.textContent = "Dashboard";
+            dashboardLink.style.display = 'block';
+            dashboardLink.style.padding = '8px 16px';
+            dashboardLink.style.color = '#111';
+            dashboardLink.style.textDecoration = 'none';
+            dashboardLink.style.fontSize = '13px';
+            dashboardLink.style.fontWeight = '600';
+            dashboardLink.style.cursor = 'pointer';
+            dashboardLink.onmouseover = () => dashboardLink.style.background = '#f5f5f5';
+            dashboardLink.onmouseout = () => dashboardLink.style.background = 'none';
+
+            // Add Sign Out link
+            const signOutBtn = document.createElement('a');
+            signOutBtn.href = "javascript:void(0)";
+            signOutBtn.textContent = "Sign out";
+            signOutBtn.style.display = 'block';
+            signOutBtn.style.padding = '8px 16px';
+            signOutBtn.style.color = '#d30005';
+            signOutBtn.style.textDecoration = 'none';
+            signOutBtn.style.fontSize = '13px';
+            signOutBtn.style.fontWeight = '600';
+            signOutBtn.style.cursor = 'pointer';
+            signOutBtn.onmouseover = () => signOutBtn.style.background = '#f5f5f5';
+            signOutBtn.onmouseout = () => signOutBtn.style.background = 'none';
+            signOutBtn.onclick = (e) => {
+              e.preventDefault();
+              localStorage.removeItem("token");
+              window.location.reload();
+            };
+
+            dropdown.appendChild(dashboardLink);
+            dropdown.appendChild(signOutBtn);
+            wrapper.appendChild(dropdown);
+
+            // Toggle dropdown on button click
+            btn.onclick = (e) => {
+              e.preventDefault();
+              dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            };
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+              if (!wrapper.contains(e.target)) {
+                dropdown.style.display = 'none';
+              }
+            });
           }
         } catch (e) {
           console.error("Failed to parse token", e);
