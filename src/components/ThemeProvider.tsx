@@ -1,7 +1,8 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-export type Theme = "dark" | "light" | "glass";
+// Vercel/Geist design — single light theme, no switching.
+export type Theme = "light";
 
 interface ThemeContextType {
   theme: Theme;
@@ -14,22 +15,8 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
-
-  useEffect(() => {
-    setThemeState("light");
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-  }, []);
-
-  const setTheme = (t: Theme) => {
-    setThemeState(t);
-    localStorage.setItem("theme", t);
-    document.documentElement.setAttribute("data-theme", t);
-  };
-
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme: "light", setTheme: () => {} }}>
       {children}
     </ThemeContext.Provider>
   );

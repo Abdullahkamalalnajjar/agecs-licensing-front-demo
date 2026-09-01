@@ -93,43 +93,39 @@ export default function ProductsPage() {
         ) : (
           rootProducts.map((product) => (
             <Link key={product.id} href={`/products/${product.id}`} style={{
-              background: "var(--bg-elevated)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--radius-lg)",
+              background: "var(--canvas-elevated)",
+              border: "1px solid var(--hairline)",
+              borderRadius: "var(--r-md)",
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
               textDecoration: "none",
-              transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
+              transition: "box-shadow 0.15s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-6px)";
-              e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.4)";
-              e.currentTarget.style.borderColor = "var(--accent-border)";
+              e.currentTarget.style.boxShadow = "0 2px 2px rgba(0,0,0,0.05), 0 8px 16px -4px rgba(0,0,0,0.08)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "none";
               e.currentTarget.style.boxShadow = "none";
-              e.currentTarget.style.borderColor = "var(--border)";
             }}
             >
               {/* ── Product Image Area ── */}
               <div style={{
                 position: "relative",
-                background: "linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-elevated) 100%)",
+                background: "var(--hairline-soft)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "2rem 1.5rem",
-                minHeight: 200,
-                borderBottom: "1px solid var(--border)",
+                minHeight: 180,
+                borderBottom: "1px solid var(--hairline)",
               }}>
                 {/* Decorative dot grid */}
                 <div style={{
                   position: "absolute", inset: 0,
-                  backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
+                  backgroundImage: "radial-gradient(circle, var(--hairline) 1px, transparent 1px)",
                   backgroundSize: "20px 20px",
-                  opacity: 0.5,
+                  opacity: 0.7,
                   pointerEvents: "none",
                 }} />
 
@@ -144,7 +140,7 @@ export default function ProductsPage() {
                       maxWidth: "100%",
                       objectFit: "contain",
                       display: "block",
-                      filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.4))",
+                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.12))",
                       transition: "transform 0.3s ease",
                     }}
                     onMouseEnter={(e) => { (e.target as HTMLImageElement).style.transform = "scale(1.06)"; }}
@@ -154,13 +150,13 @@ export default function ProductsPage() {
                 ) : (
                   <div style={{
                     position: "relative",
-                    width: 110, height: 110,
-                    background: "linear-gradient(135deg, var(--accent) 0%, #312e81 100%)",
-                    borderRadius: "var(--radius-lg)",
+                    width: 96, height: 96,
+                    background: "var(--canvas-elevated)",
+                    border: "1px solid var(--hairline)",
+                    borderRadius: "var(--r-md)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    boxShadow: "0 12px 32px rgba(124,58,237,0.35)",
                   }}>
-                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
                     </svg>
                   </div>
@@ -180,10 +176,10 @@ export default function ProductsPage() {
 
                 {/* Title */}
                 <div>
-                  <h3 style={{ margin: "0 0 0.15rem", fontSize: "1.1rem", fontWeight: 700, color: "var(--accent-light)" }}>
+                  <h3 style={{ margin: "0 0 3px", fontSize: "0.9375rem", fontWeight: 600, color: "var(--text-ink)", letterSpacing: "-0.01em" }}>
                     {product.name}
                   </h3>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontSize: "0.75rem", color: "var(--text-mute)", fontFamily: "var(--font-mono)" }}>
                     {product.family && <span>{product.family}</span>}
                     {product.family && product.version && <span>·</span>}
                     {product.version && <span>v{product.version}</span>}
@@ -192,20 +188,20 @@ export default function ProductsPage() {
 
                 {/* Price */}
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", flexWrap: "wrap", marginTop: "auto" }}>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>Starts from</span>
+                  <span style={{ fontSize: "0.7rem", color: "var(--text-mute)" }}>from</span>
                   <span style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.88rem",
-                    fontWeight: 700,
-                    color: "var(--text-primary)",
-                    background: "var(--accent-dim)",
-                    border: "1px solid var(--accent-border)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "0.1rem 0.45rem",
+                    fontSize: "0.8125rem",
+                    fontWeight: 500,
+                    color: "var(--text-ink)",
+                    background: "var(--hairline-soft)",
+                    border: "1px solid var(--hairline)",
+                    borderRadius: "var(--r-sm)",
+                    padding: "1px 6px",
                   }}>
                     ${product.prices && product.prices.length > 0 ? (product.prices[0].price || 0).toFixed(2) : "0.00"}
                   </span>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>per year</span>
+                  <span style={{ fontSize: "0.7rem", color: "var(--text-mute)" }}>/yr</span>
                 </div>
               </div>
             </Link>

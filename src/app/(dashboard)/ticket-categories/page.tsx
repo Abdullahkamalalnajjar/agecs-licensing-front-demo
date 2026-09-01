@@ -130,7 +130,7 @@ export default function TicketCategoriesPage() {
                   </td>
                   <td>
                     <div className="table-actions">
-                      <button className="btn-ghost" style={{ color: "var(--accent-light)", borderColor: "var(--accent-border)" }} onClick={() => openEdit(category)}>
+                      <button className="btn-ghost" onClick={() => openEdit(category)}>
                         Edit
                       </button>
                       <button className="btn-danger-ghost" onClick={() => handleDelete(category.id!)}>

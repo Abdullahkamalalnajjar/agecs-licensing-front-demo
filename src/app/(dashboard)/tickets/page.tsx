@@ -140,7 +140,7 @@ export default function TicketsPage() {
                   </td>
                   <td>
                     <div className="table-actions">
-                      <Link href={`/tickets/${ticket.id}`} className="btn-ghost" style={{ color: "var(--accent-light)", borderColor: "var(--accent-border)" }}>
+                      <Link href={`/tickets/${ticket.id}`} className="btn-ghost">
                         View Details
                       </Link>
                     </div>

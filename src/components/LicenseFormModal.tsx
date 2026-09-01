@@ -205,19 +205,20 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
         
         {/* ── HEADER ─────────────────────────── */}
         <div className="modal-header" style={{
-          background: "linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-surface) 100%)",
+          background: "var(--canvas-elevated)",
           padding: "1.25rem 1.75rem",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottom: "1px solid var(--border)",
+          borderBottom: "1px solid var(--hairline)",
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
             <div style={{
-              width: 36, height: 36, borderRadius: "var(--radius-md)",
-              background: generatedLicense ? "var(--success-dim)" : "var(--accent-dim)",
-              color: generatedLicense ? "var(--success)" : "var(--accent-light)",
+              width: 36, height: 36, borderRadius: "var(--r-sm)",
+              background: generatedLicense ? "var(--success-soft)" : "var(--hairline-soft)",
+              color: generatedLicense ? "var(--success)" : "var(--text-ink)",
               display: "flex", alignItems: "center", justifyContent: "center",
+              border: "1px solid var(--hairline)",
             }}>
               {generatedLicense ? (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -230,10 +231,10 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
               )}
             </div>
             <div>
-              <h2 className="modal-title" style={{ fontSize: "1.15rem", fontWeight: 700, margin: 0 }}>
-                {generatedLicense ? "License Generated Successfully" : isEditing ? "Edit License" : "Generate AGECS Serial"}
+              <h2 className="modal-title" style={{ fontSize: "1rem", fontWeight: 600, margin: 0, letterSpacing: "-0.02em" }}>
+                {generatedLicense ? "License Generated" : isEditing ? "Edit License" : "Generate AGECS Serial"}
               </h2>
-              <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-muted)" }}>
+              <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-mute)" }}>
                 {generatedLicense ? "License key is active and ready to use" : isEditing ? "Update license configuration" : "Create and assign a new product serial"}
               </p>
             </div>
@@ -254,9 +255,9 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
               display: "flex",
               alignItems: "center",
               gap: "1rem",
-              background: "var(--bg-elevated)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--radius-lg)",
+              background: "var(--hairline-soft)",
+              border: "1px solid var(--hairline)",
+              borderRadius: "var(--r-md)",
               padding: "1rem 1.25rem",
             }}>
               <div style={{
@@ -289,12 +290,11 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
 
             {/* Serial Number Display Box */}
             <div style={{
-              background: "var(--bg-elevated)",
-              border: "1px solid var(--accent-border)",
-              borderRadius: "var(--radius-lg)",
+              background: "var(--canvas-elevated)",
+              border: "1px solid var(--hairline)",
+              borderRadius: "var(--r-md)",
               padding: "1.25rem",
               position: "relative",
-              boxShadow: "0 4px 20px var(--accent-glow)",
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.6rem" }}>
                 <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--accent-light)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
@@ -305,14 +305,14 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
                 </span>
               </div>
               <div style={{
-                background: "var(--bg-surface)",
-                border: "1px solid var(--border-strong)",
-                borderRadius: "var(--radius-md)",
+                background: "var(--hairline-soft)",
+                border: "1px solid var(--hairline)",
+                borderRadius: "var(--r-sm)",
                 padding: "0.875rem 1rem",
                 fontFamily: "var(--font-mono)",
                 fontSize: "1rem",
-                fontWeight: 700,
-                color: "var(--text-primary)",
+                fontWeight: 600,
+                color: "var(--text-ink)",
                 letterSpacing: "0.06em",
                 wordBreak: "break-all",
                 textAlign: "center",
@@ -324,30 +324,30 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
 
             {/* Details Summary Grid */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-              <div style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "0.75rem 1rem" }}>
-                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Product</div>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-primary)", marginTop: "0.2rem" }}>
+              <div style={{ background: "var(--hairline-soft)", border: "1px solid var(--hairline)", borderRadius: "var(--r-sm)", padding: "0.75rem 1rem" }}>
+                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-mute)", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-mono)" }}>Product</div>
+                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-ink)", marginTop: "0.2rem" }}>
                   {generatedLicense.productName || getProductName(generatedLicense.productId) || "Standard"}
                 </div>
               </div>
 
-              <div style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "0.75rem 1rem" }}>
-                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>License Type</div>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-primary)", marginTop: "0.2rem", textTransform: "capitalize" }}>
+              <div style={{ background: "var(--hairline-soft)", border: "1px solid var(--hairline)", borderRadius: "var(--r-sm)", padding: "0.75rem 1rem" }}>
+                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-mute)", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-mono)" }}>License Type</div>
+                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-ink)", marginTop: "0.2rem", textTransform: "capitalize" }}>
                   {generatedLicense.type || (generatedLicense.isTrial ? "Trial" : "Basic")}
                 </div>
               </div>
 
-              <div style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "0.75rem 1rem" }}>
-                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Expiry</div>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: generatedLicense.expiryDate ? "var(--text-primary)" : "var(--success)", marginTop: "0.2rem" }}>
+              <div style={{ background: "var(--hairline-soft)", border: "1px solid var(--hairline)", borderRadius: "var(--r-sm)", padding: "0.75rem 1rem" }}>
+                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-mute)", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-mono)" }}>Expiry</div>
+                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: generatedLicense.expiryDate ? "var(--text-ink)" : "var(--link)", marginTop: "0.2rem" }}>
                   {generatedLicense.expiryDate ? new Date(generatedLicense.expiryDate).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "Lifetime"}
                 </div>
               </div>
 
-              <div style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "0.75rem 1rem" }}>
-                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Seats / Migrations</div>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-primary)", marginTop: "0.2rem" }}>
+              <div style={{ background: "var(--hairline-soft)", border: "1px solid var(--hairline)", borderRadius: "var(--r-sm)", padding: "0.75rem 1rem" }}>
+                <div style={{ fontSize: "0.68rem", fontWeight: 600, color: "var(--text-mute)", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "var(--font-mono)" }}>Seats / Migrations</div>
+                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-ink)", marginTop: "0.2rem" }}>
                   {generatedLicense.licenseCount ?? 1} Seat{(generatedLicense.licenseCount ?? 1) !== 1 ? "s" : ""} • {generatedLicense.migrationLimit ?? 1} Mig.
                 </div>
               </div>
@@ -593,9 +593,9 @@ export default function LicenseFormModal({ isOpen, initialData, products, users,
                     alignItems: "center",
                     gap: "0.75rem",
                     padding: "0.75rem 1rem",
-                    background: "var(--bg-elevated)",
-                    borderRadius: "var(--radius-md)",
-                    border: "1px solid var(--border)",
+                    background: "var(--hairline-soft)",
+                    borderRadius: "var(--r-sm)",
+                    border: "1px solid var(--hairline)",
                   }}>
                     <input
                       id="isTrialCheckbox"

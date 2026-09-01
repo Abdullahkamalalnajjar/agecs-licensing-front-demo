@@ -146,8 +146,8 @@ export default function PromocodeFormModal({ isOpen, onClose, onSuccess, promoco
                 />
               </div>
 
-              <div style={{ padding: "1rem", borderRadius: "var(--radius-lg)", border: "1px solid var(--border)", background: "var(--bg-elevated)" }}>
-                <h3 style={{ fontSize: "0.85rem", fontWeight: "600", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "1rem", margin: 0 }}>Discount Settings</h3>
+              <div style={{ padding: "1rem", borderRadius: "var(--r-sm)", border: "1px solid var(--hairline)", background: "var(--hairline-soft)" }}>
+                <h3 style={{ fontSize: "0.75rem", fontWeight: "600", color: "var(--text-mute)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "1rem", margin: 0, fontFamily: "var(--font-mono)" }}>Discount Settings</h3>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
                   <div className="form-group" style={{ marginBottom: 0 }}>
                     <label className="form-label">Price Multiplier</label>

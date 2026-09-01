@@ -181,33 +181,32 @@ export default function LicensesPage() {
       )}
 
       {/* ── STATS CARDS ─────────────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--sp-md)" }}>
         {[
-          { label: "Total Licenses", value: totalLicenses, icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>), color: "var(--accent)", dim: "var(--accent-dim)" },
-          { label: "Active", value: activeLicenses, icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>), color: "var(--success)", dim: "var(--success-dim)" },
-          { label: "Trial Licenses", value: trialLicenses, icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>), color: "var(--warning)", dim: "var(--warning-dim)" },
-          { label: "Expiring Soon", value: expiringSoon, icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>), color: "var(--danger)", dim: "var(--danger-dim)" },
+          { label: "Total Licenses", value: totalLicenses, icon: (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>), color: "var(--text-ink)", dim: "var(--hairline-soft)" },
+          { label: "Active", value: activeLicenses, icon: (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>), color: "var(--link)", dim: "var(--link-soft)" },
+          { label: "Trial Licenses", value: trialLicenses, icon: (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>), color: "var(--warning)", dim: "var(--warning-soft)" },
+          { label: "Expiring Soon", value: expiringSoon, icon: (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>), color: "var(--error)", dim: "var(--error-soft)" },
         ].map((stat) => (
           <div key={stat.label} style={{
-            background: "var(--bg-surface)",
-            border: "1px solid var(--border)",
-            borderRadius: "var(--radius-lg)",
-            padding: "1.25rem 1.5rem",
+            background: "var(--canvas-elevated)",
+            border: "1px solid var(--hairline)",
+            borderRadius: "var(--r-md)",
+            padding: "var(--sp-md) var(--sp-lg)",
             display: "flex",
             alignItems: "center",
-            gap: "1rem",
-            transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            gap: "var(--sp-md)",
           }}
             className="stat-card"
           >
-            <div style={{ width: 44, height: 44, borderRadius: "var(--radius-md)", background: stat.dim, display: "flex", alignItems: "center", justifyContent: "center", color: stat.color, flexShrink: 0 }}>
-              {loading ? <div className="skeleton" style={{ width: 20, height: 20, borderRadius: 4 }} /> : stat.icon}
+            <div style={{ width: 40, height: 40, borderRadius: "var(--r-sm)", background: stat.dim, display: "flex", alignItems: "center", justifyContent: "center", color: stat.color, flexShrink: 0 }}>
+              {loading ? <div className="skeleton" style={{ width: 18, height: 18, borderRadius: 3 }} /> : stat.icon}
             </div>
             <div>
-              <div style={{ fontSize: "1.6rem", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.1 }}>
-                {loading ? <div className="skeleton" style={{ width: 40, height: 28 }} /> : stat.value}
+              <div style={{ fontSize: "1.5rem", fontWeight: 600, color: "var(--text-ink)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+                {loading ? <div className="skeleton" style={{ width: 36, height: 26 }} /> : stat.value}
               </div>
-              <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", fontWeight: 500, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.05em" }}>{stat.label}</div>
+              <div style={{ fontSize: "0.69rem", color: "var(--text-mute)", fontWeight: 500, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "var(--font-mono)" }}>{stat.label}</div>
             </div>
           </div>
         ))}
@@ -215,18 +214,18 @@ export default function LicensesPage() {
 
       {/* ── SEARCH & FILTERS ────────────────────────────── */}
       <div style={{
-        background: "var(--bg-surface)",
-        border: "1px solid var(--border)",
-        borderRadius: "var(--radius-lg)",
-        padding: "1rem 1.25rem",
+        background: "var(--canvas-elevated)",
+        border: "1px solid var(--hairline)",
+        borderRadius: "var(--r-md)",
+        padding: "var(--sp-sm) var(--sp-md)",
         display: "flex",
-        gap: "0.75rem",
+        gap: "var(--sp-xs)",
         alignItems: "center",
         flexWrap: "wrap",
       }}>
         {/* Search */}
         <div style={{ flex: 1, minWidth: 200, position: "relative" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", pointerEvents: "none" }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--text-mute)", pointerEvents: "none" }}>
             <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
           <input
@@ -235,24 +234,24 @@ export default function LicensesPage() {
             placeholder="Search by serial, name, email, product…"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            style={{ paddingLeft: "2.25rem", fontSize: "0.875rem" }}
+            style={{ paddingLeft: "2.25rem" }}
           />
         </div>
 
         {/* Status Filter */}
-        <div style={{ display: "flex", gap: "0.25rem", background: "var(--bg-elevated)", borderRadius: "var(--radius-md)", padding: "0.25rem", border: "1px solid var(--border)" }}>
+        <div style={{ display: "flex", gap: "2px", background: "var(--hairline-soft)", borderRadius: "var(--r-pill-c)", padding: "3px", border: "1px solid var(--hairline)" }}>
           {(["all", "active", "inactive"] as const).map(s => (
             <button key={s} onClick={() => setFilterStatus(s)} style={{
-              padding: "0.35rem 0.85rem",
-              borderRadius: "var(--radius-sm)",
+              padding: "0 var(--sp-md)",
+              height: 28,
+              borderRadius: "var(--r-pill-c)",
               border: "none",
               cursor: "pointer",
               fontSize: "0.8rem",
               fontWeight: 500,
-              background: filterStatus === s ? "var(--accent)" : "transparent",
-              color: filterStatus === s ? "white" : "var(--text-secondary)",
-              transition: "all 0.18s ease",
-              textTransform: "capitalize",
+              background: filterStatus === s ? "var(--ink)" : "transparent",
+              color: filterStatus === s ? "#fff" : "var(--text-body)",
+              transition: "all 0.15s ease",
             }}>
               {s === "all" ? "All Status" : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
@@ -260,19 +259,19 @@ export default function LicensesPage() {
         </div>
 
         {/* Trial Filter */}
-        <div style={{ display: "flex", gap: "0.25rem", background: "var(--bg-elevated)", borderRadius: "var(--radius-md)", padding: "0.25rem", border: "1px solid var(--border)" }}>
+        <div style={{ display: "flex", gap: "2px", background: "var(--hairline-soft)", borderRadius: "var(--r-pill-c)", padding: "3px", border: "1px solid var(--hairline)" }}>
           {(["all", "paid", "trial"] as const).map(t => (
             <button key={t} onClick={() => setFilterTrial(t)} style={{
-              padding: "0.35rem 0.85rem",
-              borderRadius: "var(--radius-sm)",
+              padding: "0 var(--sp-md)",
+              height: 28,
+              borderRadius: "var(--r-pill-c)",
               border: "none",
               cursor: "pointer",
               fontSize: "0.8rem",
               fontWeight: 500,
-              background: filterTrial === t ? "var(--accent)" : "transparent",
-              color: filterTrial === t ? "white" : "var(--text-secondary)",
-              transition: "all 0.18s ease",
-              textTransform: "capitalize",
+              background: filterTrial === t ? "var(--ink)" : "transparent",
+              color: filterTrial === t ? "#fff" : "var(--text-body)",
+              transition: "all 0.15s ease",
             }}>
               {t === "all" ? "All Types" : t.charAt(0).toUpperCase() + t.slice(1)}
             </button>
@@ -281,7 +280,7 @@ export default function LicensesPage() {
 
         {/* Results count */}
         {!loading && (
-          <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", whiteSpace: "nowrap", marginLeft: "auto" }}>
+          <span style={{ fontSize: "0.8rem", color: "var(--text-mute)", whiteSpace: "nowrap", marginLeft: "auto", fontFamily: "var(--font-mono)" }}>
             {filtered.length} result{filtered.length !== 1 ? "s" : ""}
           </span>
         )}
@@ -337,13 +336,13 @@ export default function LicensesPage() {
                     <td>
                       <span style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: "0.78rem",
-                        fontWeight: 600,
-                        background: "var(--bg-elevated)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "var(--radius-sm)",
-                        padding: "0.2rem 0.5rem",
-                        color: "var(--accent-light)",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        background: "var(--hairline-soft)",
+                        border: "1px solid var(--hairline)",
+                        borderRadius: "var(--r-sm)",
+                        padding: "1px 6px",
+                        color: "var(--text-body)",
                         letterSpacing: "0.03em",
                         display: "inline-block",
                         maxWidth: 130,
@@ -398,20 +397,20 @@ export default function LicensesPage() {
                     {/* Usage */}
                     <td>
                       <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                        <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", display: "flex", gap: "0.75rem" }}>
+                        <div style={{ fontSize: "0.75rem", color: "var(--text-mute)", display: "flex", gap: "0.75rem", fontFamily: "var(--font-mono)" }}>
                           <span title="Licenses Used">
-                            <span style={{ color: "var(--text-secondary)", fontWeight: 600 }}>{license.usedCount ?? 0}</span>/{license.licenseCount ?? 1} seats
+                            <span style={{ color: "var(--text-ink)", fontWeight: 600 }}>{license.usedCount ?? 0}</span>/{license.licenseCount ?? 1} seats
                           </span>
                           <span title="Migrations Used">
-                            <span style={{ color: "var(--text-secondary)", fontWeight: 600 }}>{license.migrationCount ?? 0}</span>/{license.migrationLimit ?? 1} mig.
+                            <span style={{ color: "var(--text-ink)", fontWeight: 600 }}>{license.migrationCount ?? 0}</span>/{license.migrationLimit ?? 1} mig.
                           </span>
                         </div>
                         {/* Mini progress bar */}
-                        <div style={{ height: 3, width: 80, background: "var(--bg-elevated)", borderRadius: 99, overflow: "hidden" }}>
+                        <div style={{ height: 3, width: 80, background: "var(--hairline)", borderRadius: 99, overflow: "hidden" }}>
                           <div style={{
                             height: "100%",
                             width: `${Math.min(100, ((license.usedCount ?? 0) / (license.licenseCount ?? 1)) * 100)}%`,
-                            background: "var(--accent)",
+                            background: "var(--ink)",
                             borderRadius: 99,
                             transition: "width 0.4s ease",
                           }} />
@@ -422,9 +421,9 @@ export default function LicensesPage() {
                     {/* Expiry */}
                     <td>
                       {license.expiryDate ? (
-                        <span style={{ fontSize: "0.85rem", color: expiring ? "var(--warning)" : "var(--text-secondary)", fontWeight: expiring ? 600 : 400, display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                        <span style={{ fontSize: "0.8rem", color: expiring ? "var(--warning)" : "var(--text-body)", fontWeight: expiring ? 600 : 400, display: "flex", alignItems: "center", gap: "0.35rem", fontFamily: "var(--font-mono)" }}>
                           {expiring && (
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                               <line x1="12" y1="9" x2="12" y2="13"></line>
                             </svg>
@@ -432,7 +431,7 @@ export default function LicensesPage() {
                           {new Date(license.expiryDate).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
                         </span>
                       ) : (
-                        <span style={{ fontSize: "0.85rem", color: "var(--success)", fontWeight: 600 }}>Lifetime</span>
+                        <span style={{ fontSize: "0.8rem", color: "var(--link)", fontWeight: 500, fontFamily: "var(--font-mono)" }}>Lifetime</span>
                       )}
                     </td>
 
@@ -556,8 +555,7 @@ export default function LicensesPage() {
 
       <style>{`
         .stat-card:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
+          box-shadow: 0 2px 2px rgba(0,0,0,0.05), 0 8px 16px -4px rgba(0,0,0,0.08);
         }
       `}</style>
     </div>

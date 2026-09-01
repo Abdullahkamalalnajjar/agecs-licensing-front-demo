@@ -120,10 +120,10 @@ export default function PromocodesPage() {
                 <tr key={promo.id}>
                   <td>
                     <span style={{
-                      fontFamily: "var(--font-mono)", fontSize: "0.875rem", fontWeight: "600",
-                      background: "var(--accent-dim)", color: "var(--accent-light)",
-                      padding: "0.2rem 0.6rem", borderRadius: "var(--radius-sm)",
-                      border: "1px solid var(--accent-border)", letterSpacing: "0.05em",
+                      fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: "500",
+                      background: "var(--hairline-soft)", color: "var(--text-ink)",
+                      padding: "2px 8px", borderRadius: "var(--r-sm)",
+                      border: "1px solid var(--hairline)", letterSpacing: "0.04em",
                     }}>
                       {promo.code}
                     </span>
@@ -145,7 +145,7 @@ export default function PromocodesPage() {
                   </td>
                   <td>
                     <div className="table-actions">
-                      <button className="btn-ghost" style={{ color: "var(--accent-light)", borderColor: "var(--accent-border)" }}
+                      <button className="btn-ghost"
                         onClick={() => { setSelectedPromocode(promo); setIsModalOpen(true); }}>
                         Edit
                       </button>
